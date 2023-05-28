@@ -6,33 +6,33 @@ name: Docker
 # documentation.
 
 on:
-    push:
-        branches: [ "master" ]
-        # Publish semver tags as releases.
-        tags: [ 'v*.*.*' ]
-    pull_request:
-        branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "master" ]
 
 env: # Use docker.io for Docker Hub if empty
-    REGISTRY: ghcr.io
-    # github.repository as <account>/<repo>
-    IMAGE_NAME: ${{ github.repository }}
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
-    build:
+  build:
 
-runs-on: ubuntu-latest
-permissions:
-    contents: read
-    packages: write
-    # This is used to complete the identity challenge
-    # with sigstore/fulcio when running outside of PRs.
-    id-token: write
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
-steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
@@ -40,7 +40,7 @@ steps:
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v2.8.1
         with:
-            cosign-release: 'v1.11.0'
+          cosign-release: 'v1.11.0'
 
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
@@ -53,9 +53,9 @@ steps:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2.1.0
         with:
-            registry: ${{ env.REGISTRY }}
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
@@ -63,7 +63,7 @@ steps:
         id: meta
         uses: docker/metadata-action@v4.1.1
         with:
-            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -71,9 +71,9 @@ steps:
         id: build-and-push
         uses: docker/build-push-action@v3.2.0
         with:
-            context: .
-            push: ${{ github.event_name != 'pull_request' }}
-            tags: ${{ steps.meta.outputs.tags }}
-            labels: ${{ steps.meta.outputs.labels }}
-            cache-from: type=gha
-            cache-to: type=gha,mode=max
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
