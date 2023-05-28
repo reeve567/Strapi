@@ -1,5 +1,5 @@
 {
-  "name": "hylite",
+  "name": "doot",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -20,7 +20,7 @@
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "e05eafe1-91bc-45f7-b604-ab4c16ef869c"
+    "uuid": "ee8a4b28-c792-42f3-b2a9-a205c1939f2c"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
