@@ -19,6 +19,7 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       playgroundAlways: false,
+      shadowCRUD: true
     }
   },
 });
