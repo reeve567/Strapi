@@ -12,17 +12,17 @@ module.exports = ({ env }) => ({
         defaultFrom: "no-reply@reeve.dev",
         defaultReplyTo: "no-reply@reeve.dev",
       },
-    }
+    },
   },
-  
+
   graphql: {
     enabled: true,
     config: {
-      playgroundAlways: false,
+      playgroundAlways: true,
       shadowCRUD: true,
       apolloServer: {
         tracing: false,
       },
-    }
+    },
   },
 });
