@@ -25,10 +25,9 @@ COPY --from=build /opt/app ./
 COPY src ./
 COPY config ./
 COPY public ./
+
 RUN mkdir public/uploads
 RUN mkdir generated
-RUN mkdir generated/schema
-RUN mkdir generated/type
 
 ENV PATH /opt/node_modules/.bin:$PATH
 
