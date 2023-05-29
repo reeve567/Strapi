@@ -20,6 +20,11 @@ module.exports = ({ env }) => ({
     config: {
       playgroundAlways: true,
       shadowCRUD: true,
+      generateArtifacts: true,
+      artifacts: {
+        schema: "/opt/app/generated/schema",
+        typegen: "/opt/app/generated/type"
+      },
       apolloServer: {
         tracing: false,
       },
