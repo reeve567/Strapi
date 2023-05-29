@@ -19,7 +19,10 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       playgroundAlways: false,
-      shadowCRUD: true
+      shadowCRUD: true,
+      apolloServer: {
+        tracing: false,
+      },
     }
   },
 });
