@@ -31,9 +31,7 @@ RUN mkdir generated
 
 ENV PATH /opt/node_modules/.bin:$PATH
 
-ARG SCRIPT=start
-
 RUN chown -R node:node /opt/app
 USER node
 EXPOSE 1337
-CMD ["npm", "run", "$SCRIPT"]
+CMD ["npm", "run", "start"]
